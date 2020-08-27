@@ -26,13 +26,10 @@
           <!--<li><a href="{{ voucher }}">{{ text_voucher }}</a></li>-->
           <!--<li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>-->
           <li><a target="_blank" href="https://api.whatsapp.com/send?phone=829 276-9197" title="whatsapp">
-            <div id= "fa-size"><span class="fa fa-whatsapp" style="font-size: 20px;color: #6DBA44;"></span>&nbsp;+1(829) 276-9197<span></span></div>
+            <div id= "fa-size"><span class="fa fa-whatsapp" style="font-size: 20px;color: #6DBA44;"></span>&nbsp;+1(809)684-9816<span></span></div>
           </a></li>
-          <li>
-            <div id= "fa-size"><span> 809-591-5050</span></div>
-          </li>
           <li id="fa-size-mail"><a href="mailto:einfo@webstore.do" title="mailto">
-            <div><span class="fa fa-envelope"></span> <span>&nbsp; info@webstore.do</span></div></a></li>
+            <div><span class="fa fa-envelope"></span> <span>&nbsp; info@printstudio.com.do</span></div></a></li>
           <!--<li><a href="{{ special }}">{{ text_special }}</a></li>-->
           <li>
             <div id="fa-size-sn">
@@ -40,6 +37,9 @@
               <a target="_blank" data-platform="instagram" href="https://www.instagram.com/" title="Instagram"><span class="fa fa-instagram"> &nbsp; </span></a>
               <a target="_blank" data-platform="twitter" href="https://www.twitter.com/" title="Twitter"><span class="fa fa-twitter"> &nbsp; </span></a>
             </div>
+            <h5>{{ text_enter }}</h5>
+             <div id="fa-size-sn">
+              <img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/tarjetas.png" alt="Check out with PayPal" style="width: 200px;"/>
           </li>
            <h5>{{ text_enter }}</h5>
         </ul>
@@ -47,10 +47,10 @@
 
 
       <div class="col-sm-3">
-        <div><h5>{{ text_assistance}}</h5></div>
+        <div><h5>{{ text_info_footer}}</h5></div>
         <ul class="list-unstyled">
           <li><a href="{{ contact }}">{{ text_contact }}</a></li>
-          <li><a href="http://www.w3.org">Proyectos Realizados</a></li>
+          <li><a href="http://www.w3.org">PrintClub®</a></li>
           <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
           <li><a href="{{ account }}">{{ text_account }}</a></li>
           {% if logged %}
@@ -63,7 +63,7 @@
       
 
       <div  class="col-sm-3">
-        <div><h5>{{ text_assistance}}</h5></div>
+        <div><h5>{{ text_Servicio_al_cliente}}</h5></div>
         <ul class="list-unstyled">
          {% for information in informations %}
           <li><a href="{{ information.href }}">{{ information.title }}</a></li>

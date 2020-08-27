@@ -225,6 +225,7 @@
             {% if option.type == 'file' %}
             <div class="form-group{% if option.required %} required {% endif %}">
               <label class="control-label">{{ option.name }}</label>
+              
               <button type="button" id="button-upload{{ option.product_option_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default btn-block"><i class="fa fa-upload"></i> {{ button_upload }}</button>
               <input type="hidden" name="option[{{ option.product_option_id }}]" value="" id="input-option{{ option.product_option_id }}" />
             </div>
@@ -275,7 +276,7 @@
             </div>
             {% endif %}
             <div>
-                <p class="pop-up-button">Ver guía de tallas</p>
+                <p class="pop-up-button">Ver guía de impresión</p>
                 <div class="pop-up">
                   <span>x</span>
                   <br><p></p><p class="h1-popup">Tabla Conversión Tallas Internacional</p> 
