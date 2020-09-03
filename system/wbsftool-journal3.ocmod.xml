@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>WaaBay SFTool Journal3 Upload - Coded by waabay.com</name>
+    <code>default</code>
+    <version>1.0</version>
+    <author>WaaBay</author>
+    <link>http://www.waabay.com</link>
+	
+	<file path="catalog/view/theme/journal3/template/account/register.twig">
+		<operation>
+            <search><![CDATA[<legend>{{ text_newsletter }}</legend>]]></search>
+            <add position="before" offset="1"><![CDATA[
+			{% if register_dropbox %}
+            {{ drop_file }}	
+			{% endif %}
+            ]]></add>
+        </operation>
+	</file>
+	
+	<file path="catalog/view/theme/journal3/template/product/product.twig">
+		<operation>
+            <search><![CDATA[{% if option.type == 'file' %}]]></search>
+            <add position="replace" offset="6"><![CDATA[
+			{% if option.type == 'file' %}
+			{% if product_dropbox %}
+            {{ option.sftool }}
+			{% endif %}
+			{% endif %}
+            ]]></add>
+        </operation>
+	</file>
+	
+	<file path="catalog/controller/journal3/checkout.php">
+		<operation>
+            <search index="0"><![CDATA[$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);]]></search>
+            <add position="replace" offset="6"><![CDATA[
+			//sftool
+			$sfile = array();
+			$filename = '';
+						
+			if (is_array($option['value'])) {
+				foreach ($option['value'] as $code) {						
+					$upload_info = $this->model_tool_upload->getUploadByCode($code);						
+					$sfile[] = $upload_info['name'];
+										
+					if ($filename == '') { 
+						$filename = $upload_info['name'];
+					} else {
+						$filename .= '<br/>File: ' . $upload_info['name'];
+					}						
+				}
+							
+				if ($filename) {
+					$value = $filename;
+				} else {
+					$value = '';
+				}
+			} else {
+				$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
+				if ($upload_info) {
+					$value = $upload_info['name'];
+				} else {
+					$value = '';
+				}
+			}
+			//sftool
+            ]]></add>
+        </operation>
+		
+		<operation>
+            <search><![CDATA['value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)]]></search>
+            <add position="replace"><![CDATA[
+			'value' => $value
+            ]]></add>
+        </operation>
+	</file>
+	
+	<file path="catalog/controller/checkout/cart.php">
+		<operation>
+            <search index="0"><![CDATA[$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);]]></search>
+            <add position="replace" offset="6"><![CDATA[
+			//sftool
+			$sfile = array();
+			$filename = '';
+						
+			if (is_array($option['value'])) {
+				foreach ($option['value'] as $code) {						
+					$upload_info = $this->model_tool_upload->getUploadByCode($code);						
+					$sfile[] = $upload_info['name'];
+										
+					if ($filename == '') { 
+						$filename = $upload_info['name'];
+					} else {
+						$filename .= '<br/>&nbsp - File: ' . $upload_info['name'];
+					}						
+				}
+							
+				if ($filename) {
+					$value = $filename;
+				} else {
+					$value = '';
+				}
+			} else {
+				$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
+				if ($upload_info) {
+					$value = $upload_info['name'];
+				} else {
+					$value = '';
+				}
+			}
+			//sftool
+            ]]></add>
+        </operation>
+		
+		<operation>
+            <search><![CDATA['value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)]]></search>
+            <add position="replace"><![CDATA[
+			'value' => $value
+            ]]></add>
+        </operation>
+	</file>
+
+	<file path="catalog/model/journal3/order.php">
+		<operation>
+            <search><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "order_option SET order_id = '" . (int)$order_id . "', order_product_id = '" . (int)$order_product_id . "', product_option_id = '" . (int)$option['product_option_id'] . "', product_option_value_id = '" . (int)$option['product_option_value_id'] . "', name = '" . $this->db->escape($option['name']) . "', `value` = '" . $this->db->escape($option['value']) . "', `type` = '" . $this->db->escape($option['type']) . "'");]]></search>
+            <add position="replace"><![CDATA[
+            if ($option['type'] == 'file') {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "order_option SET order_id = '" . (int)$order_id . "', order_product_id = '" . (int)$order_product_id . "', product_option_id = '" . (int)$option['product_option_id'] . "', product_option_value_id = '" . (int)$option['product_option_value_id'] . "', name = '" . $this->db->escape($option['name']) . "', `value` = '" . $this->db->escape(serialize($option['value'])) . "', `type` = '" . $this->db->escape($option['type']) . "'");
+			} else {				
+				$this->db->query("INSERT INTO " . DB_PREFIX . "order_option SET order_id = '" . (int)$order_id . "', order_product_id = '" . (int)$order_product_id . "', product_option_id = '" . (int)$option['product_option_id'] . "', product_option_value_id = '" . (int)$option['product_option_value_id'] . "', name = '" . $this->db->escape($option['name']) . "', `value` = '" . $this->db->escape($option['value']) . "', `type` = '" . $this->db->escape($option['type']) . "'");
+			}
+            ]]></add>
+        </operation>
+	</file>
+</modification>
